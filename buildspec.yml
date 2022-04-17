@@ -21,9 +21,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push 365623645180.dkr.ecr.us-east-1.amazonaws.com/pipelines:latest
       - echo Writing image definitions file...
-      - printf '[{"name": "app","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
-
 
 artifacts:
   files:
