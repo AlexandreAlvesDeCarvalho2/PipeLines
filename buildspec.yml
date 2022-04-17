@@ -12,17 +12,20 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
-      - echo Build started on 'date'
+      - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t REPOSITORY_URI:latest .
-      - docker tag REPOSITORY_URI:latest REPOSITORY_URI:IMAGE_TAG
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-      - echo Build completed on 'date'
+      - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push 365623645180.dkr.ecr.us-east-1.amazonaws.com/pipelines:latest
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:IMAGE_TAG
       - echo Writing image definitions file...
+      - printf '[{"name":"nodeapp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
+
 
 artifacts:
   files:
