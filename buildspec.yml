@@ -12,8 +12,6 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
-      - echo dockerd
-      - sudo dockerd
       - echo Build started on 'date'
       - echo Building the Docker image...
       - docker build -t pipelines .
