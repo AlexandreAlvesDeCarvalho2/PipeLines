@@ -6,9 +6,6 @@ RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|
 RUN yum update -y
 RUN yum -y install httpd
 RUN yum -y install php
-RUN sudo amazon-linux-extras install docker
-RUN sudo service docker start
-RUN sudo systemctl enable docker
 CMD /usr/sbin/httpd -D FOREGROUND
 
 WORKDIR /var/www/html
