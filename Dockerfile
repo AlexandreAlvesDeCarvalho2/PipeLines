@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lts/centros:latest
+FROM public.ecr.aws/lts/centos:latest
 LABEL MAINTAINER = "alexandre"
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
